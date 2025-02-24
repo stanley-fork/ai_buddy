@@ -1,4 +1,3 @@
-import 'package:ai_buddy/core/config/mellowtel.dart';
 import 'package:ai_buddy/core/extension/context.dart';
 import 'package:ai_buddy/core/navigation/route.dart';
 import 'package:ai_buddy/core/ui/input/input_field.dart';
@@ -69,10 +68,8 @@ class _APIKeyBottomSheetState extends State<APIKeyBottomSheet> {
                   });
 
                   if (widget.isCalledFromHomePage) {
-                    // ignore: use_build_context_synchronously
                     context.pop();
                   } else {
-                    // ignore: use_build_context_synchronously
                     AppRoute.home.go(context);
                   }
                 },
@@ -106,31 +103,6 @@ class _APIKeyBottomSheetState extends State<APIKeyBottomSheet> {
                 ),
               ),
               const SizedBox(height: 16),
-              FutureBuilder<String?>(
-                future: SecureStorage().getApiKey(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const SizedBox.shrink();
-                  }
-                  if (snapshot.hasData && snapshot.data != null) {
-                    return Column(
-                      children: [
-                        TextButton(
-                          onPressed: () => showMellowtelSettings(context),
-                          child: Text(
-                            'Mellowtel Consent Settings',
-                            style: context.textTheme.labelMedium!.copyWith(
-                              color: context.colorScheme.primary,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                      ],
-                    );
-                  }
-                  return const SizedBox.shrink();
-                },
-              ),
             ],
           ),
         ),
